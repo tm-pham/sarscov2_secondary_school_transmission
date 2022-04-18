@@ -4,6 +4,7 @@ This repository contains the data, code and figures for the manuscript "Medium-t
 " by Thi Mui Pham,  Ilse Westerhof, Marc Bonten, Martin Bootsma, Mirjam Kretzschmar, Ganna Rozhnova, Patricia Bruijning-Verhagen. 
 Ganna Rozhnova and Patricia Bruijning-Verhagen contributed equally and are co-senior authors. 
 
+## Abstract
 
 **Background:** The recent emergence of the Omicron variant has caused a new wave of SARS-CoV-2 infections across many countries worldwide. We highlight which epidemiological parameters are crucial for understanding seasonal patterns of SARS-CoV-2 transmission and assessing interventions for effective infection control in secondary schools over a course of two and a half years. 
 
