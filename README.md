@@ -1,7 +1,7 @@
 # Medium-term SARS-CoV-2 transmission in secondary schools: a modelling study
 
 This repository contains the data, code and figures for the manuscript "Medium-term SARS-CoV-2 transmission in secondary schools: a modelling study
-" by Thi Mui Pham,  Ilse Westerhof, Marc Bonten, Martin Bootsma, Mirjam Kretzschmar, Ganna Rozhnova, Patricia Bruijning-Verhagen. 
+" by Thi Mui Pham,  Ilse Westerhof, Martin Bootsma, Mirjam Kretzschmar, Ganna Rozhnova, Patricia Bruijning-Verhagen. 
 Ganna Rozhnova and Patricia Bruijning-Verhagen contributed equally and are co-senior authors. 
 
 ## Abstract
