@@ -5,9 +5,10 @@ rm(list=ls())
 source("plotting_code/covid19school_plotting_functions.R")
 
 # Load all scenarios
-fileName <- create.data.for.plotting(file_path = "/Users/tm-pham/surfdrive/PHD/Utrecht/JuliusCenter/COVID-19_school_transmission/results/omicron_sim/",
+fileName <- create.data.for.plotting(file_path = "../model_results/",
                                      file_suffix="omicron_all_", 
-                                     scenarios=c("omicron_Baseline_townsend_redSusc_R2R1-5",
+                                     scenarios=c(#Baseline
+                                                 "omicron_baseline_townsend_redSusc_R2R1-5",
                                                  # Higher reproduction number
                                                  "omicron_townsend_redSusc_R1R0-75",
                                                  "omicron_baseTownsend_redSusc_R4R3",
@@ -28,7 +29,6 @@ fileName <- create.data.for.plotting(file_path = "/Users/tm-pham/surfdrive/PHD/U
                                                  "omicron_quaranClass50_townsend_redSusc_R2R1-5",
                                                  "omicron_quaranClass75_townsend_redSusc_R2R1-5",
                                                  # Screening
-                                                 # Imperfect sensitivity
                                                  "omicron_scr50NoCTwice_iso33_100_townsend_redSusc_R2R1-5", 
                                                  "omicron_scr75NoCTwice_iso33_100_townsend_redSusc_R2R1-5",
                                                  # Annual booster

@@ -605,7 +605,7 @@ combine.simulations <- function(name, no_scenarios=6, output_path="../results/",
 # ---------------------------------------------------------------------------- #
 create.data.for.plotting <- function(file_path = "/Users/tm-pham/surfdrive/PHD/Utrecht/JuliusCenter/COVID-19_school_transmission/results/long_sim/",
                                      figuresPath = "/Users/tm-pham/surfdrive/PHD/Utrecht/JuliusCenter/COVID-19_school_transmission/figures/", 
-                                     file_suffix = "townsend_fast_fastrecSlow_",
+                                     file_suffix = "",
                                      # Scenarios
                                      scenarios = c("noInterv_townsend_redSusc_redInf", 
                                                    "noInterv_townsend_fullSusc_redInf", 
