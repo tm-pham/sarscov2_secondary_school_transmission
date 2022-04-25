@@ -2,6 +2,7 @@
 
 
 This repository contains the data and code for the manuscript "Seasonal patterns of SARS-CoV-2 transmission in secondary schools: a modelling study" by Thi Mui Pham,  Ilse Westerhof, Martin Bootsma, Mirjam Kretzschmar, Ganna Rozhnova, Patricia Bruijning-Verhagen. 
+
 Ganna Rozhnova and Patricia Bruijning-Verhagen contributed equally to thius work and are co-senior authors. 
 
 ## Correspondence
