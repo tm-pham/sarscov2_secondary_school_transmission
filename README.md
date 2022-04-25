@@ -29,7 +29,7 @@ The agent-based model was implemented in R (version 4.0.1). The implementation c
 The results of the model were analyzed in R (version 4.0.1). The respective code can be found [here](https://github.com/tm-pham/sarscov2_secondary_school_transmission/tree/master/plotting_code)
 
 ## Results
-Results of the model can be found here.
+Results of the model can be found [here](https://github.com/tm-pham/sarscov2_secondary_school_transmission/tree/master/model_results).
 
 
 
