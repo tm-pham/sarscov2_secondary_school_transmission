@@ -54,6 +54,7 @@ get.legend.scenarios <- function(list,
                                  colors, 
                                  suffix, 
                                  text_size = 30,
+                                 n_row = 3, 
                                  width=7.5, height=4){
   max_iter <- max(unlist(lapply(list, length)))
   (moss <- plot.outbreak.size(list, 
@@ -72,7 +73,7 @@ get.legend.scenarios <- function(list,
                                  legend.text = element_text(size=text_size),
                                  legend.box.background = element_rect(colour = "black", size=2),
                                  legend.position = "right")
-  moss_plot <- moss_plot + guides(fill=guide_legend(nrow=3,byrow=F))
+  moss_plot <- moss_plot + guides(fill=guide_legend(nrow=n_row,byrow=F))
   legend <- get_legend(moss_plot)
   ggsave(legend, filename = paste0(outputPath, "legend_scenarios_", suffix, ".pdf"), 
          width=width, height=height)
@@ -603,34 +604,14 @@ combine.simulations <- function(name, no_scenarios=6, output_path="../results/",
 # ---------------------------------------------------------------------------- #
 # Combine simulations
 # ---------------------------------------------------------------------------- #
-create.data.for.plotting <- function(file_path = "/Users/tm-pham/surfdrive/PHD/Utrecht/JuliusCenter/COVID-19_school_transmission/results/long_sim/",
-                                     figuresPath = "/Users/tm-pham/surfdrive/PHD/Utrecht/JuliusCenter/COVID-19_school_transmission/figures/", 
+create.data.for.plotting <- function(file_path = "model_results/",
                                      file_suffix = "",
+                                     prefix = "sim_",
                                      # Scenarios
-                                     scenarios = c("noInterv_townsend_redSusc_redInf", 
-                                                   "noInterv_townsend_fullSusc_redInf", 
-                                                   "noInterv_townsend_redSusc_fullInf",
-                                                   "noInterv_townsend_redSusc_redInf",
-                                                   "noInterv_fast_redSusc_redInf", 
-                                                   "noInterv_fast_fullSusc_redInf", 
-                                                   "noInterv_fast_redSusc_fullInf",
-                                                   "noInterv_fast_redSusc_redInf",
-                                                   "noInterv_fast_recSlow_redSusc_redInf", 
-                                                   "noInterv_fast_recSlow_fullSusc_redInf", 
-                                                   "noInterv_fast_recSlow_redSusc_fullInf"),
-                                     names_scenarios = c("townsend: redSusc=0.75, redInf=0.5, R_w=1.2", 
-                                                         "townsend: fullSusc=1.0, redInf=0.5, R_w=1.2", 
-                                                         "townsend: redSusc=0.75, fullInf=1.0, R_w=1.2",
-                                                         "townsend: redSusc=0.75, redInf=0.5, R_w=2.0",
-                                                         "fast: redSusc=0.75, redInf=0.5, R_w=1.2", 
-                                                         "fast: fullSusc=1.0, redInf=0.5, R_w=1.2", 
-                                                         "fast: redSusc=0.75, fullInf=1.0, R_w=1.2",
-                                                         "fast: redSusc=0.75, redInf=0.5, R_w=2.0",
-                                                         "natImm slow: redSusc=0.75, redInf=0.5, R_w=1.2", 
-                                                         "natImm slow: fullSusc=1.0, redInf=0.5, R_w=1.2", 
-                                                         "natImm slow: redSusc=0.75, fullInf=1.0, R_w=1.2"),
-                                     suffix_scenarios = c(rep("_R1-2", 3), "_R2-0", rep("_R1-2", 3), "_R2-0",rep("_R1-2", 3)),
-                                     suffix = "_vacc60_18m",
+                                     scenarios,
+                                     names_scenarios, 
+                                     suffix_scenarios,
+                                     suffix = "_vacc60_30m",
                                      # Colors
                                      asymptmatic_col = "#f6b26b", 
                                      presymptomatic_col = "#ff8000", 
@@ -641,15 +622,14 @@ create.data.for.plotting <- function(file_path = "/Users/tm-pham/surfdrive/PHD/U
   # Loading functions
   source("model_code/covid19school_packages.R")
   source("plotting_code/covid19school_plotting_functions.R")
-  
+  print(getwd())
   # Colors for asymptomatic, presymptomatic, symptomatic infections
   inf_colors = c(symptomatic_col, presymptomatic_col, asymptmatic_col)
   
   # Create names
-  prefix = "sim_"
   vacc_cov = parse_number(str_extract(suffix, "vacc[0-9]+"))
   if(is.na(vacc_cov)) parse_number(str_extract(scenarios[1], "vacc[0-9]+"))
-  print(paste0("Vaccination coverage = ", vacc_cov, "%"))
+  
   # Folder names
   names_list = paste0(prefix, scenarios, suffix_scenarios, suffix)
   print(paste0("names_list=", names_list))
@@ -657,9 +637,9 @@ create.data.for.plotting <- function(file_path = "/Users/tm-pham/surfdrive/PHD/U
   file_name <- paste0(prefix, scenarios[1], suffix_scenarios[1], suffix)
   print(paste0("file_name=", file_name))
   # Output folder
-  current_folder = paste0("sim_", file_suffix, format(Sys.Date(), "%d%m%Y"))
+  current_folder = paste0(prefix, "combined_", file_suffix)
   print(paste0("Current folder: ", current_folder))
-  outputPath = paste0(figuresPath, current_folder, "/")
+  outputPath = paste0(file_path, current_folder, "/")
   if(!file.exists(outputPath)){
     print("Creating folder for the first time.")
     dir.create(outputPath)
@@ -703,7 +683,7 @@ create.data.for.plotting <- function(file_path = "/Users/tm-pham/surfdrive/PHD/U
   for(ind_name in 1:length(names_list)){
     current_name <- names_list[[ind_name]]
     load(paste0(file_path, current_name, '/', current_name, '_1_reduced.RData'))
-    print(paste0(file_path, current_name, '/', current_name, '_1_reduced.RData'))
+    # print(paste0(file_path, current_name, '/', current_name, '_1_reduced.RData'))
     
     # Reproduction number
     R_vector_list[[ind_name]] <- R_vector
@@ -789,23 +769,17 @@ create.data.for.plotting <- function(file_path = "/Users/tm-pham/surfdrive/PHD/U
         intro_teachers_weekly_total_list[[s]] <- intro_teachers_weekly_total_list[[s]] + temp
       }
     }
-    
-    
-    
     # Screening statistics
     screening_stats_list[[ind_name]] <- unlist(lapply(lapply(screening_stats, function(x) apply(x, 1, function(y) sum(y, na.rm=T))), mean))
     det_screening_list[[ind_name]] <- unlist(lapply(lapply(det_screening, function(x) apply(x, 1, function(y) sum(y, na.rm=T))), mean))
   }
-  
-
-  
   
   scenarios_suffix = scenarios
   scenarios = names_scenarios
   colors = scenario_colors
   
   permutation = seq(1, length(scenarios))
-  file_name = paste0("long_simulations_", file_suffix, length(scenarios), ".RData")
+  file_name = paste0("combined_simulations_", file_suffix, "_",length(scenarios), ".RData")
   print(paste0("File name: ", file_name))
   save(list=ls(all.names=TRUE), 
        file = paste0(file_path, file_name), 
@@ -1028,9 +1002,9 @@ n.per.unit <- function(n_list,
   }
 
   ### Saving to file
-  plot_prefix <- ifelse(percentage, "perc_per_", "n_per_")
-  ggsave(plot, file=paste0(figuresPath, plot_prefix, time_unit_name, "_",suffix, "_",occup_suffix,"_plot.pdf"), 
-         width=width, height=height)
+  # plot_prefix <- ifelse(percentage, "perc_per_", "n_per_")
+  # ggsave(plot, file=paste0(figuresPath, plot_prefix, time_unit_name, "_",suffix, "_",occup_suffix,"_plot.pdf"), 
+  #        width=width, height=height)
   return(list(data=df_summary, plot=plot))
 }
 

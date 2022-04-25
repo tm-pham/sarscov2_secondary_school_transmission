@@ -5,26 +5,22 @@ rm(list=ls())
 source("plotting_code/covid19school_plotting_functions.R")
 
 # Load all scenarios
-fileName <- create.data.for.plotting(file_path = "../model_results/",
-                                     file_suffix="omicron_all_", 
+fileName <- create.data.for.plotting(file_path = "model_results/",
+                                     file_suffix="omicron_all", 
                                      scenarios=c(#Baseline
-                                                 "omicron_baseline_townsend_redSusc_R2R1-5",
+                                                 "omicron_Baseline_townsend_redSusc_R2R1-5",
                                                  # Higher reproduction number
                                                  "omicron_townsend_redSusc_R1R0-75",
                                                  "omicron_baseTownsend_redSusc_R4R3",
                                                  # Susceptibility after reinfection
                                                  "omicron_townsend_redSusc50_R2R1-5",
                                                  "omicron_townsend_fullSusc_R2R1-5",
-                                                 # Increased virulence
-                                                 "omicron_townsend_incrVir20_R2R1-5",
-                                                 # Waning
-                                                 "omicron_waning18m_redSusc_R2R1-5", # slow
-                                                 "omicron_waning3m_redSusc_R2R1-5", # fast
                                                  # Immune escape for vaccinated
                                                  "omicron_highVacc_townsend_redSusc_R2R1-5", # high vaccination efficacy
                                                  "omicron_lowVacc_townsend_redSusc_R2R1-5", #low vaccination efficacy
-                                                 # Shorter isolation period and low adherence
-                                                 "omicron_noiso_townsend_redSusc_R2R1-5",
+                                                 # Waning
+                                                 "omicron_waning18m_redSusc_R2R1-5", # slow
+                                                 "omicron_waning3m_redSusc_R2R1-5", # fast
                                                  # Class quarantine 
                                                  "omicron_quaranClass50_townsend_redSusc_R2R1-5",
                                                  "omicron_quaranClass75_townsend_redSusc_R2R1-5",
@@ -41,16 +37,12 @@ fileName <- create.data.for.plotting(file_path = "../model_results/",
                                                        ### Susceptibility
                                                        "Reduced susceptibility (50%) to reinfection",
                                                        "Full susceptibility to reinfection",
-                                                       #### Virulence
-                                                       "Increased virulence (20% more symptoms)",
-                                                       #### Waning
-                                                       "Slow waning (avg duration: 18 months)",
-                                                       "Fast waning (avg duration: 3 months)",
                                                        #### Higher immune escape
                                                        "Lower immune escape in vaccinated",
                                                        "Higher immune escape in vaccinated",
-                                                       #### Shorter isolation
-                                                       "Shorter isolation (10% adherence)",
+                                                       #### Waning
+                                                       "Slow waning (avg duration: 18 months)",
+                                                       "Fast waning (avg duration: 3 months)",
                                                        #### Quarantine
                                                        "Class quarantine (50% case isolation)",
                                                        "Class quarantine (75% case isolation)",
@@ -59,9 +51,8 @@ fileName <- create.data.for.plotting(file_path = "../model_results/",
                                                        "Screening 2x weekly (75% adherence)",
                                                        ### Booster campaign
                                                        "Annual booster campaign"
-                                                       
                                      ),
-                                     suffix_scenarios=c(rep("", 17)), 
+                                     suffix_scenarios=c(rep("", 14)), 
                                      suffix = "_vacc60_30m",
                                      scenario_colors = c("#0095d0", # blue
                                                          
@@ -72,15 +63,11 @@ fileName <- create.data.for.plotting(file_path = "../model_results/",
                                                          "#38761d", # dark green
                                                          
                                                          "#d66363", # light red
-                                                         
+                                                         "#980000", # dark red
+
                                                          "#f1c232", # yellow
                                                          "#ff8000", # orange
-                                                         
-                                                         "#d66363", # light red
-                                                         "#980000", # dark red
-                                                         
-                                                         "#274e13", # dark green
-                                                         
+                                        
                                                          "#9900ff", # light purple
                                                          "#351c75", # dark purple
                                                          
@@ -102,18 +89,12 @@ for(i in 1:length(n_students_list)){
 # ============================================================================ #
 # Plotting
 # ============================================================================ #
-subsets <- list(c(1,2,3), c(1,4,5), c(1,9,10), c(1,7,8), 
-                c(1,6),     # Increased virulence
-                c(1,11),    # Shorter isolation
-                c(1,12,13), # Class quarantine
+subsets <- list(c(1,2,3), c(1,4,5), c(1,6,7), c(1,8,9), 
                 c(1),       # Only baseline
-                c(1,14,15), # Screening 2x weekly (50%,75%), imperfect sensitivity
-                c(1,16),     # Baseline and annual booster
-                c(1,17),     # Baseline and annual booster with increased VE
-                c(1,16,17),
-                c(1,13,15,17)
+                c(1,10,11),  # Class quarantine
+                c(1,12,13), # Screening 2x weekly (50%,75%), imperfect sensitivity
+                c(1,14)     # Baseline and annual booster (increased VE)
 ) 
-quaran_ind <- c(1,12,13)
 facet_titles <- c("Reproduction number", "Susceptibility to reinfection", "Vaccine immune escape", "Waning of immunity",
                   rep("", length(subsets)-4))
 # facet_titles <- c(rep("", length(subsets)))
@@ -127,7 +108,7 @@ for(s in 1:length(subsets)){
                               time_unit = 7, time_unit_name = "week",
                               type = 2:4, 
                               scenarios = scenarios[unlist(subsets[[s]])], 
-                              figuresPath=outputPath, 
+                              figuresPath="/model_results/", 
                               suffix="n_inf_students", occup_suffix=paste0("vacc",vacc_cov, "_", s),
                               title="", title_y="Infected students per week (%)", 
                               start_date = start_date, date_format = "%d/%m/%Y",
