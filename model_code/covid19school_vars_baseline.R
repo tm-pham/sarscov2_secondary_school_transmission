@@ -158,8 +158,6 @@ n_teacher_cont_other = 4
 # =========================================================================== #
 # Parameters (to be changed)
 # =========================================================================== #
-
-
 ### Numerical tolerance
 tol = 1e-5
 
@@ -206,8 +204,7 @@ vacc_eff_1 = c(0.57, 0.70)/red_vacc_exp
 vacc_eff_2 = c(0.88, 0.92)/red_vacc_exp
 vacc_eff_teacher_1 = c(0.57, 0.70)/red_vacc_exp_teacher
 vacc_eff_teacher_2 = c(0.59, 0.866)/red_vacc_exp_teacher
-# vacc_eff_1 = c(0.2, 0.59)
-# vacc_eff_2 = c(0.78, 0.9)
+
 vacc_rate_weekly_1 = 0
 vacc_rate_weekly_2 = 0
 vacc_weekly_flags <- rep(0, length(scr_flags))
@@ -221,16 +218,10 @@ vc_corr = rep(-1, length(scr_flags))
 
 ### Fixed introductions from community
 student_incidence <- 944*1.6*279/100000; teacher_incidence <- 72*1.3*243/100000
-# (intro_fix_per_week <- c(944*1.6*279, 72*1.3*243)/100000)
-# intro_fix_per_week <- c(944*1.6*161, 72*1.3*115)/100000
-# intro_fix_per_week <- c(944*1.6*90, 72*1.3*60)/100000
 intro_fix_per_week <- NULL
 
 ### External incidence rate for importations
-# external_prob = 1.5*c(0.0007965315, 0.0007965315)
 (external_prob = c(student_incidence/(mean(vacc_eff_2)*0.64*prop_vaccinated[1]*944*7), teacher_incidence/(mean(vacc_eff_teacher_2)*prop_vaccinated[2]*72*7)))
-# external_prob = c(0.0005218215,0.0005218215)
-# external_prob = c(0.00007340511,0.00007340511)
 
 ### Waning
 lag_reinfection_vec = rep(0, length(scenarios))
@@ -353,8 +344,6 @@ reinfection.function <- function(t, baseline=0.1301183, lambda=0.003746311184177
 if(use_reinf_function){
   time_vec <- seq(0, 5000, by=1/3)
   if(!use_townsend){
-    # lambda_students = 0.000268938
-    # lambda_teachers = 0.002541675 
     lambda_students = lambda_townsend
     lambda_teachers = lambda_townsend
     df_prob_reinfection_students = as.data.frame(cbind(time=time_vec, prob=reinfection.function(t=1, lambda=lambda_students)))

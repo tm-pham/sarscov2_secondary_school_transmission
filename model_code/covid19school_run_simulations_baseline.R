@@ -17,7 +17,7 @@ R0 = 2.0
 ### Packages and functions
 source("covid19school_packages.R")  # Installs and loads all necessary packages
 source("covid19school_functions.R") # Loads all relevant functions
-source("covid19school_vars_waningExp.R")      # Load all relevant variables
+source("covid19school_vars_baseline.R")      # Load all relevant variables
 source("covid19school_init_vars_function.R") 
 source("covid19school_epidemic.R")  # Load main function for simulation
 
@@ -28,13 +28,8 @@ quarantine_class_flags = rep(F, length(scenarios))
 quarantine_fully_vacc_flags = rep(F, length(scenarios))
 compliance_iso = 0.33 # Proportion of individuals that adhere to isolation
 
-# Below is for equal infectiousness between symptomatic and asymptiomatic
-# asymp.scale <- function(n=1, min=1, max=1){
-#   return(1)
-# }
 # Baseline: no boosting
 booster_time = NULL
-
 
 ### Results path
 resultsPath="../../results/"
