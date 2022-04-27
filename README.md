@@ -37,18 +37,23 @@ Main function that executes all events that take place in each simulation and at
 Functions related to disease characteristics, i.e. incubation period, proportion of symptomatic infections, relative infectiousness of asymptomatic to symptomatic infections, relative susceptbility and infectiivity of students compared to teachers, realtive susceptibility of vaccinated vs unvaccinated, time-varying infectivity, and probability of transmission per contact. 
 
 **covid19school_init_vars_function.R**
+
 Set up data frames for students and teachers. Needs to be initiliazed at the beginning of each simulation run. 
 
 **covid19school_functions.R**
+
 Auxiliary functions. 
 
 **covid19school_transmission_function.R**
+
 Functions that executes the transmission between infected and susceptible individuals. It accounts for transmission from students, teachers, vaccinated, unvaccinated, direct and aerosol (indirect) transmission. 
 
 **covid19school_quarantine_isolation_function.R**
+
 Functions for isolation of symptomatically infected individuals, as well as quarantine of close contacts and classmates. It also contains the function that entails testing after on day five after the start of quarantine to potentially shorten the quarantine.  
 
 **covid19school_screening_function.R**
+
 Function that entails screening of individuals accounting for adherence and imperfect test sensitivity. 
 
 ### Plotting code
