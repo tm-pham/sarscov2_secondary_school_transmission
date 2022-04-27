@@ -23,7 +23,33 @@ Data from the pilot project is publicly available here.
 
 ## Code
 ### Model code
-The agent-based model was implemented in R (version 4.0.1). The implementation code can be found [here](https://github.com/tm-pham/sarscov2_secondary_school_transmission/tree/master/model_code)
+The agent-based model was implemented in R (version 4.0.1). The implementation code can be found [here](https://github.com/tm-pham/sarscov2_secondary_school_transmission/tree/master/model_code). 
+
+The code is divided into various parts. A brief explanation of the most important ones can be found below. 
+
+**covid19school_vars_baseline.R**
+Parameter values such as time steps, study period, vacation times, reproduction number, vaccine efficacy, test sensitivity, waning probability, class sizes, etc. are set in this file. 
+
+**covid19school_epidemic.R**
+Main function that executes all events that take place in each simulation and at each time step (see appendix for a more detailed explanation). 
+
+**covid19school_functions_diseaseChar.R**
+Functions related to disease characteristics, i.e. incubation period, proportion of symptomatic infections, relative infectiousness of asymptomatic to symptomatic infections, relative susceptbility and infectiivity of students compared to teachers, realtive susceptibility of vaccinated vs unvaccinated, time-varying infectivity, and probability of transmission per contact. 
+
+**covid19school_init_vars_function.R**
+Set up data frames for students and teachers. Needs to be initiliazed at the beginning of each simulation run. 
+
+**covid19school_functions.R**
+Auxiliary functions. 
+
+**covid19school_transmission_function.R**
+Functions that executes the transmission between infected and susceptible individuals. It accounts for transmission from students, teachers, vaccinated, unvaccinated, direct and aerosol (indirect) transmission. 
+
+**covid19school_quarantine_isolation_function.R**
+Functions for isolation of symptomatically infected individuals, as well as quarantine of close contacts and classmates. It also contains the function that entails testing after on day five after the start of quarantine to potentially shorten the quarantine.  
+
+**covid19school_screening_function.R**
+Function that entails screening of individuals accounting for adherence and imperfect test sensitivity. 
 
 ### Plotting code
 The results of the model were analyzed in R (version 4.0.1). The respective code can be found [here](https://github.com/tm-pham/sarscov2_secondary_school_transmission/tree/master/plotting_code)
