@@ -28,12 +28,15 @@ The agent-based model was implemented in R (version 4.0.1). The implementation c
 The code is divided into various parts. A brief explanation of the most important ones can be found below. 
 
 **covid19school_vars_baseline.R**
+
 Parameter values such as time steps, study period, vacation times, reproduction number, vaccine efficacy, test sensitivity, waning probability, class sizes, etc. are set in this file. 
 
 **covid19school_epidemic.R**
+
 Main function that executes all events that take place in each simulation and at each time step (see appendix for a more detailed explanation). 
 
 **covid19school_functions_diseaseChar.R**
+
 Functions related to disease characteristics, i.e. incubation period, proportion of symptomatic infections, relative infectiousness of asymptomatic to symptomatic infections, relative susceptbility and infectiivity of students compared to teachers, realtive susceptibility of vaccinated vs unvaccinated, time-varying infectivity, and probability of transmission per contact. 
 
 **covid19school_init_vars_function.R**
