@@ -27,7 +27,7 @@ The agent-based model was implemented in R (version 4.0.1). The implementation c
 
 The code is divided into various parts. A brief explanation of the most important ones can be found below. 
 
-**covid19school_vars_baseline.R**
+<ins>covid19school_vars_baseline.R</ins>
 
 Parameter values such as time steps, study period, vacation times, reproduction number, vaccine efficacy, test sensitivity, waning probability, class sizes, etc. are set in this file. 
 
